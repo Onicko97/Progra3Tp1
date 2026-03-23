@@ -354,5 +354,6 @@ public class Interfaz {
 		btnDelete.setBounds(534, 383, 113, 39);
 		frame.getContentPane().add(btnDelete);
 		
+		
 	}
 }

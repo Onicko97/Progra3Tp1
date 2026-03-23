@@ -24,4 +24,5 @@ public class Codigo {
 			txt.setText(txt.getText() + boton);
 		}
 	}
+	
 }
