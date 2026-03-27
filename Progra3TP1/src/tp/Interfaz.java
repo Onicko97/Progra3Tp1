@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+
+import model.Palabras;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -45,6 +48,7 @@ public class Interfaz {
 	 */
 	public Interfaz() 
 	{
+		
 		initialize();
 	}
 
