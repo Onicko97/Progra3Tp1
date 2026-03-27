@@ -13,6 +13,7 @@ import view.components.Tecla;
 
 public class JuegoPresenter {
 	private VentanaPrincipal ventana;
+	private int celdaActual;
 	
 	public JuegoPresenter(VentanaPrincipal ventana) {
 		this.ventana = ventana;
@@ -36,6 +37,14 @@ public class JuegoPresenter {
 		configurarListenerBotonesTeclado();
 	}
 	
+	public int getCeldaActual() {
+		return this.celdaActual;
+	}
+	
+	public void addCelda() {
+		this.celdaActual += 1;
+	}
+	
 	public void configurarListenerBotonesTeclado() {
 		List<Tecla> teclas = ventana.getTecladoUI().getTeclas();
 		List<CeldaComponent> celdas = ventana.getGrillaUI().getCeldas();
@@ -43,8 +52,11 @@ public class JuegoPresenter {
 			tecla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("hello world");
-				celdas.get(0).setLetra(tecla.getText());
+				celdas.get(getCeldaActual()).setLetra(tecla.getText());
+				addCelda();
 			}
+
+			
 		}
 					
 					);
