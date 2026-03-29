@@ -54,19 +54,35 @@ public class JuegoPresenter {
 	public void addColumnaActual() {
 		this.columnaActual += 1;
 	}
+	public void subtractColumnaActual() {
+		this.columnaActual -= 1;
+	}
 	public void addFilaActual() {
 		this.filaActual += 1;
 	}
 	
 	public void configurarListenerBotonesTeclado() {
+		
 		List<Tecla> teclas = ventana.getTecladoUI().getTeclas();
 		CeldaComponent[][] celdas = ventana.getGrillaUI().getCeldas();
+		
 		for(JButton tecla: teclas ) {
 			tecla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("hello world");
+				if(tecla.getText() == "dl") {
+					if(getColumnaActual() != 0) {
+						subtractColumnaActual();
+						celdas[getFilaActual()][getColumnaActual()].setLetra("");
+					}
+					return;
+				}
+				if(getColumnaActual()==5) {
+					columnaActual = 0;
+					addFilaActual();
+				}
+				//System.out.println("hello world");
 				celdas[getFilaActual()][getColumnaActual()].setLetra(tecla.getText());
-				addFilaActual();
+				addColumnaActual();
 				
 			}
 

@@ -10,8 +10,10 @@ import javax.swing.JPanel;
 import view.components.Tecla;
 
 public class TecladoUI extends JPanel{
-	private final String[] abecedario = {"a", "b", "c", "d", "e", "f", "g", "h", "i","j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+	
+	private final String[] abecedario = {"a", "b", "c", "d", "e", "f", "g", "h", "i","j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "dl"};
 	private List<Tecla> teclas;
+	
 	public TecladoUI() {
 		propiedadesPorDefecto();
 	}

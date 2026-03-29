@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class VentanaPrincipal extends JFrame {
+	
 	private final GrillaUI grilla = new GrillaUI();
 	private final TecladoUI teclado = new TecladoUI();
 	
