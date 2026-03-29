@@ -7,17 +7,20 @@ import java.util.List;
 
 import javax.swing.JButton;
 
+import model.Tablero;
 import view.VentanaPrincipal;
 import view.components.CeldaComponent;
 import view.components.Tecla;
 
 public class JuegoPresenter {
 	private VentanaPrincipal ventana;
+	private Tablero modelo;
 	private int filaActual;
 	private int columnaActual;
 	
-	public JuegoPresenter(VentanaPrincipal ventana) {
+	public JuegoPresenter(VentanaPrincipal ventana, Tablero modelo) {
 		this.ventana = ventana;
+		this.modelo = modelo;
 	}
 	
 	public void iniciar() {
@@ -37,6 +40,9 @@ public class JuegoPresenter {
 				});
 		configurarListenerBotonesTeclado();
 	}
+	
+	
+	
 	
 	public int getFilaActual() {
 		return this.filaActual;
