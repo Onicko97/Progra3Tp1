@@ -11,28 +11,35 @@ import view.components.CeldaComponent;
 
 public class GrillaUI extends JPanel {
 
-	private List<CeldaComponent> celdas;
+	private CeldaComponent[][] celdas;
+	private final int FILAS = 6;
+	private final int COLUMNAS = 5;
 	
 	public GrillaUI() {
 		propiedadesPorDefecto();
 	}
 	
 	public void propiedadesPorDefecto() {
-		this.celdas = new ArrayList<>();
+		this.celdas = new CeldaComponent[6][5];
 		this.setLayout(new GridLayout(6, 5, 10, 10));
 		crearGrilla( );
 		
 	}
 	
 	public void crearGrilla( ) {
-		for(int i = 0; i < 30; i++) {
-			CeldaComponent celda = new CeldaComponent();
-			celdas.add(celda);
-			this.add(celda);
+		for(int fila = 0; fila < FILAS; fila++) {
+			for(int col = 0; col < COLUMNAS; col++ ) {
+				
+				CeldaComponent celda = new CeldaComponent();
+				this.celdas[fila][col] = celda;
+				this.add(celda);
+			
+			}
+			
 		}
 	}
 	
-	public List<CeldaComponent> getCeldas() {
+	public CeldaComponent[][] getCeldas() {
 		return celdas;
 	}
 }
