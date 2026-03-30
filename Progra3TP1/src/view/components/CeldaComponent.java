@@ -36,5 +36,8 @@ public class CeldaComponent extends JPanel {
 		letraLabel.setText(letra);
 	}
 	
+	public void removeLetra() {
+		letraLabel.setText("");
+	}
 	
 }

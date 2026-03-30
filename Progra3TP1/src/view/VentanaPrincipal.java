@@ -27,6 +27,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		//this.getContentPane().setLayout(null);
 		this.setBackground(Color.black);
+		this.setFocusable(true);
 	}
 	
 	public void crearGrilla() {
