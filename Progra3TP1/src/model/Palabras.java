@@ -9,11 +9,11 @@ public class Palabras {
 
 	private final static Set<String> palabrasWordle = new HashSet<>(Set.of("perro", "casas", "viejo", "sonar"));
 	//private final static Set<String> palabrasWordle = new HashSet<>();
+	//private final static String listaPalabras[] = {"perro", "casas", "viejo", "sonar"};
 	
 	public static String obtenerPalabraRandom() {
 
-
-//		for (String string : palabrasWordle) {
+//		for (String string : listaPalabras) {
 //			palabrasWordle.add(string);
 //		}
 		Random random = new Random();
