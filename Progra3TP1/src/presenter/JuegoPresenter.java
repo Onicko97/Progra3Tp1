@@ -1,22 +1,14 @@
 package presenter;
 
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
-
-import javax.swing.JButton;
-
+import model.EstadoLetra;
 import model.Tablero;
 import view.VentanaPrincipal;
-import view.components.CeldaComponent;
-import view.components.Tecla;
+
 
 public class JuegoPresenter {
 	private VentanaPrincipal ventana;
 	private Tablero modelo;
-	private int filaActual;
-	private int columnaActual;
+	
 	
 	public JuegoPresenter(VentanaPrincipal ventana, Tablero modelo) {
 		this.ventana = ventana;
@@ -24,57 +16,73 @@ public class JuegoPresenter {
 	}
 	
 	public void iniciar() {
-		EventQueue.invokeLater(new Runnable() 
-				{
-					public void run() 
-					{
-						try 
-						{
-							ventana.setVisible(true);
-						} 
-						catch (Exception e) 
-						{
-							e.printStackTrace();
-						}
-					}
-				});
-		configurarListenerBotonesTeclado();
+		ventana.mostrar();
+		configurarControlador();
 	}
 	
 	
-	
-	
-	public int getFilaActual() {
-		return this.filaActual;
+	public void configurarControlador() {
+		ventana.setListenerTeclado(new VentanaPrincipal.TecladoListener() {
+	        @Override
+	        public void teclaPresionada(String valor) {
+	            if (valor.equals("ENTER")) {
+	                verificarEstadoJuego();
+	            } else if (valor.equals("dl")){
+	            	procesarBorrar();
+	            }
+	            	else  {  procesarLetra(valor);
+	            }
+	        }
+	    });
 	}
-	public int getColumnaActual() {
-		return this.columnaActual;
-	}
 	
-	public void addColumnaActual() {
-		this.columnaActual += 1;
+	private void modificarBackgroundCelda() {
+	    int fila = modelo.getFilaActual();
+	    
+	    for (int col = 0; col < 5; col++) {
+	        EstadoLetra resultado = modelo.verificarCoincidePosicionLetra(col);
+	        
+	        ventana.pintarCelda(fila, col, resultado);
+	    }
 	}
-	public void addFilaActual() {
-		this.filaActual += 1;
-	}
-	
-	public void configurarListenerBotonesTeclado() {
-		List<Tecla> teclas = ventana.getTecladoUI().getTeclas();
-		CeldaComponent[][] celdas = ventana.getGrillaUI().getCeldas();
-		for(JButton tecla: teclas ) {
-			tecla.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("hello world");
-				celdas[getFilaActual()][getColumnaActual()].setLetra(tecla.getText());
-				addFilaActual();
-				
-			}
 
-			
-		}
-					
-					);
-		}
+	private void procesarBorrar() {
+	    if (modelo.getColumnaActual() > 0) {
+	        
+	        modelo.borrarUltimaLetra();
+	        
+	        int fila = modelo.getFilaActual();
+	        int col = modelo.getColumnaActual();
+	        
+	        ventana.limpiarCeldaEnGrilla(fila, col);
+	    }
+	}
+	private void verificarEstadoJuego() {
+	    if (modelo.getColumnaActual() < 5) { 
+	        return; 
+	    }
+
+	    modificarBackgroundCelda();
+
+	    if (modelo.verificarPalabraConFila()) {
+	        ventana.mostrarMensaje("Ganaste");
+	    } else {
+	        modelo.avanzarFila(); 
+	        
+	        if (!modelo.quedanIntentos()) {
+	            ventana.mostrarMensaje("Perdiste" + modelo.getPalabraRandom());
+	        }
+	    }
+	}
+	private void procesarLetra(String letra) {
+        
+		if (modelo.puedeInsertarLetra()) {
+            int fila = modelo.getFilaActual();
+            int col = modelo.getColumnaActual();
+            
+            modelo.insertarLetra(letra); 
+            ventana.mostrarLetraEnGrilla(fila, col, letra);
+        }
 	}
 	
 }

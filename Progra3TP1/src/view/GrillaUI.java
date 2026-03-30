@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,4 +43,14 @@ public class GrillaUI extends JPanel {
 	public CeldaComponent[][] getCeldas() {
 		return celdas;
 	}
+	public void pintarCelda(int fila, int col, Color color) {
+	    if (fila < FILAS && col < COLUMNAS) {
+	        celdas[fila][col].setBackground(color);
+	    }
+	}
+	public void escribirEnCelda(int fila, int col, String letra) {
+	    CeldaComponent celda = celdas[fila][col];
+	    celda.setLetra(String.valueOf(letra));
+	}
+	
 }

@@ -18,4 +18,8 @@ public class Palabras {
 	public static boolean verificarExistenciaPalabra(String palabra) {
 		return palabrasWordle.contains(palabra);
 	}
+	
+	public static String[] stringToArray(String word) {
+		return word.split("");
+	}
 }
