@@ -40,6 +40,15 @@ public class Tablero {
 	public void setColumnaActual(int col) {
 		this.columnaActual = col;
 	}
+	public void addColumnaActual() {
+		this.columnaActual += 1;
+	}
+	public void subtractColumnaActual() {
+		this.columnaActual -= 1;
+	}
+	public void addFilaActual() {
+		this.filaActual += 1;
+	}
 	
 	public boolean verificarPalabraConFila(String palabra) {
 		int fila = this.getFilaActual();
