@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -21,5 +22,10 @@ public class Palabras {
 	
 	public static String[] stringToArray(String word) {
 		return word.split("");
+	}
+	
+	public static boolean contieneLetraEnArray(String[] letras, String letra) {
+		boolean isContained = Arrays.stream(letras).anyMatch(letra::equals);
+		return isContained;
 	}
 }

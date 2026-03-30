@@ -50,21 +50,32 @@ public class JuegoPresenter {
 		configurarListenerVentana();
 	}
 	
+	public void modificarBackgroundCelda(int filaActual) {
+		CeldaComponent[] celdas = ventana.getGrillaUI().getCeldas()[modelo.getFilaActual()];
+		for(CeldaComponent celda: celdas) { 
+			celda.setBackground(Color.GREEN);
+		}
+	}
+	
 	public void modificarBackgroundCelda() {
 		CeldaComponent[] celdas = ventana.getGrillaUI().getCeldas()[modelo.getFilaActual()];
 		for (int i = 0; i < celdas.length; i++) {
 			
 			if(modelo.verificarCoincidePosicionLetra(i)) {
 				celdas[i].setBackground(Color.GREEN);
-			}
-			//if(modelo.verificarContieneLetra()) {}
+			} else if(modelo.verificarContieneLetra(i)) {
+			
+				celdas[i].setBackground(Color.YELLOW);
+			
 		}
 		
+	}
 	}
 	
 	public void verificarEstadoJuego() {
 		
 			if (modelo.verificarPalabraConFila()) {
+				modificarBackgroundCelda(modelo.getFilaActual());
 				JOptionPane.showMessageDialog(null, "usted ha ganado!!!");
 			} else {
 				modificarBackgroundCelda();
