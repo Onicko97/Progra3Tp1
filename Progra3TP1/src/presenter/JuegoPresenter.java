@@ -70,19 +70,19 @@ public class JuegoPresenter {
 			tecla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(tecla.getText() == "dl") {
-					if(getColumnaActual() != 0) {
-						subtractColumnaActual();
-						celdas[getFilaActual()][getColumnaActual()].setLetra("");
+					if(modelo.getColumnaActual() != 0) {
+						modelo.subtractColumnaActual();
+						celdas[modelo.getFilaActual()][modelo.getColumnaActual()].setLetra("");
 					}
 					return;
 				}
-				if(getColumnaActual()==5) {
-					columnaActual = 0;
-					addFilaActual();
+				if(modelo.getColumnaActual()==5) {
+					modelo.setColumnaActual(0);
+					modelo.addFilaActual();
 				}
 				//System.out.println("hello world");
-				celdas[getFilaActual()][getColumnaActual()].setLetra(tecla.getText());
-				addColumnaActual();
+				celdas[modelo.getFilaActual()][modelo.getColumnaActual()].setLetra(tecla.getText());
+				modelo.addColumnaActual();
 				
 			}
 
