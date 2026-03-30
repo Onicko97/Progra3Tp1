@@ -94,6 +94,12 @@ public class Tablero {
 		return palabraRandomArray[index].equals(celda.getLetra());
 		
 	}
-	public boolean verificarContieneLetra() {return true; }
+	public boolean verificarContieneLetra(int index) {
+		int fila = this.getFilaActual();
+		Celda[] arrayCeldas = celdas[fila];
+		Celda celda = arrayCeldas[index];
+		String[] palabraRandomArray = Palabras.stringToArray(palabraRandom);
+		return Palabras.contieneLetraEnArray(palabraRandomArray, celda.getLetra());
+	}
 	
 }
