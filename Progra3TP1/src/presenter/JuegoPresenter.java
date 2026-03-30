@@ -114,10 +114,11 @@ public class JuegoPresenter {
 			tecla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 					String letra = tecla.getText();
-					modelo.modificarCelda(modelo.getFilaActual(), modelo.getColumnaActual(), letra);
-					if( tecla.getText() == "dl") {
+					if(modelo.getColumnaActual() < 5)
+						modelo.modificarCelda(modelo.getFilaActual(), modelo.getColumnaActual(), letra);
+					if( tecla.getText() == "dl" && modelo.getColumnaActual()>0) {
 						borrarLetra(celdas, modelo);
-					} else {
+					} else if(modelo.getColumnaActual() < 5 && tecla.getText() != "dl"){
 						agregarLetra(celdas, modelo, tecla);
 					}
 //				
@@ -142,7 +143,7 @@ public class JuegoPresenter {
 	}
 	
 	public void borrarLetra(CeldaComponent[][] celdas, Tablero modelo) {
-		celdas[modelo.getFilaActual()][modelo.getColumnaActual()].removeLetra();
+		celdas[modelo.getFilaActual()][modelo.getColumnaActual()-1].removeLetra();
 		modelo.subtractColumnaActual();
 	}
 }

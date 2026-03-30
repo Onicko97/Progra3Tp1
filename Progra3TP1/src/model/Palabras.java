@@ -8,14 +8,16 @@ import java.util.Set;
 public class Palabras {
 
 	private final static Set<String> palabrasWordle = new HashSet<>(Set.of("perro", "casas", "viejo", "sonar"));
-	//private final static Set<String> palabrasWordle = new HashSet<>();
-	//private final static String listaPalabras[] = {"perro", "casas", "viejo", "sonar"};
+//	private final static Set<String> palabrasWordle = new HashSet<>();
+//	private final static String listaPalabras[] = {"perro", "casas", "viejo", "sonar"};
+	
+//	este codigo comentado (renglones: 11,12,18,19) esta xq Set.of me tira error en mi eclipse viejo, no lo borren
 	
 	public static String obtenerPalabraRandom() {
 
 //		for (String string : listaPalabras) {
-//			palabrasWordle.add(string);
-//		}
+//			palabrasWordle.add(string);}
+		
 		Random random = new Random();
 		int numRandom = random.nextInt(palabrasWordle.size());
 		String[] palabras = palabrasWordle.toArray(new String[palabrasWordle.size()]);
