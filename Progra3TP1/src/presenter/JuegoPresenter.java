@@ -66,11 +66,12 @@ public class JuegoPresenter {
 
 	    if (modelo.verificarPalabraConFila()) {
 	        ventana.mostrarMensaje("Ganaste");
+	        reiniciarJuego();
 	    } else {
 	        modelo.avanzarFila(); 
-	        
 	        if (!modelo.quedanIntentos()) {
 	            ventana.mostrarMensaje("Perdiste, la palabra era: " + modelo.getPalabraRandom());
+	            reiniciarJuego();
 	        }
 	    }
 	}
@@ -83,6 +84,11 @@ public class JuegoPresenter {
             modelo.insertarLetra(letra); 
             ventana.mostrarLetraEnGrilla(fila, col, letra);
         }
+	}
+	
+	public void reiniciarJuego() {
+		modelo.reiniciarJuego();
+		ventana.reiniciarJuego();
 	}
 	
 }
