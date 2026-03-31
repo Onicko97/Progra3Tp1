@@ -15,6 +15,7 @@ import model.EstadoLetra;
 public class VentanaPrincipal extends JFrame {
 	private final GrillaUI grilla = new GrillaUI();
 	private final TecladoUI teclado = new TecladoUI();
+	private final HeaderUI header = new HeaderUI();
 	
 	public void mostrar() {
 	    EventQueue.invokeLater(new Runnable() {
@@ -31,18 +32,19 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal() {
 		super("Wordle");
 		propiedadesPorDefecto();
+		crearHeader();
 		crearGrilla();
 		crearTeclado();
-	
+		
 	}
 	
 	
 	private void propiedadesPorDefecto() {
-		this.setBounds(100, 100, 653, 458);
+		this.setBounds(100, 100, 653, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//this.getContentPane().setLayout(null);
-		this.setBackground(Color.black);
+		this.setBackground(Color.BLACK);
 	}
 	
 	public void crearGrilla() {
@@ -51,6 +53,10 @@ public class VentanaPrincipal extends JFrame {
 	
 	public void crearTeclado() {
 		this.getContentPane().add(teclado, BorderLayout.SOUTH);
+	}
+	
+	public void crearHeader() {
+		this.getContentPane().add(header, BorderLayout.NORTH);
 	}
 	
 	private GrillaUI getGrillaUI() {

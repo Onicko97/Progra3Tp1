@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import view.components.CeldaComponent;
 
@@ -22,7 +23,9 @@ public class GrillaUI extends JPanel {
 	
 	public void propiedadesPorDefecto() {
 		this.celdas = new CeldaComponent[6][5];
-		this.setLayout(new GridLayout(6, 5, 10, 10));
+		this.setBorder(new EmptyBorder(10,195,10,195));
+		this.setLayout(new GridLayout(6, 5, 5, 5));
+		this.setBackground(Color.BLACK);
 		crearGrilla( );
 		
 	}
