@@ -70,7 +70,7 @@ public class JuegoPresenter {
 	        modelo.avanzarFila(); 
 	        
 	        if (!modelo.quedanIntentos()) {
-	            ventana.mostrarMensaje("Perdiste" + modelo.getPalabraRandom());
+	            ventana.mostrarMensaje("Perdiste, la palabra era: " + modelo.getPalabraRandom());
 	        }
 	    }
 	}
