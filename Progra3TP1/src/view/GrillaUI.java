@@ -53,4 +53,13 @@ public class GrillaUI extends JPanel {
 	    celda.setLetra(String.valueOf(letra));
 	}
 	
+	public void reiniciarCeldas() {
+		for(int fila = 0; fila < FILAS; fila++) {
+			for(int col = 0; col < COLUMNAS; col++) {
+				pintarCelda(fila,col,Color.WHITE);
+				escribirEnCelda(fila,col,"");
+			}
+		}
+	}
+	
 }

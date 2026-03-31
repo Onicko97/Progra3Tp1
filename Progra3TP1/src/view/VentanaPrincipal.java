@@ -82,10 +82,14 @@ public class VentanaPrincipal extends JFrame {
 	    switch (estado) {
 	    case BIEN:  color = Color.GREEN; break;
         case CASI:  color = Color.YELLOW; break;
-        case MAL:   color = Color.GRAY; break; 
-	        default:    color = Color.WHITE;
+        case MAL:   color = Color.GRAY; break;
+	    default:    color = Color.WHITE;
 	    }
 	    
 	    this.grilla.pintarCelda(fila, col, color);
+	}
+	
+	public void reiniciarJuego() {
+		grilla.reiniciarCeldas();
 	}
 }

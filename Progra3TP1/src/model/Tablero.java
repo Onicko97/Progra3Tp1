@@ -116,4 +116,15 @@ public class Tablero {
 	    return EstadoLetra.MAL;
 	}
 	
+	public void reiniciarJuego() { //debe reiniciar todo y elegir una nueva palabra random
+		filaActual = 0;
+		columnaActual = 0;
+		obtenerPalabraJuego();
+		for(int fila = 0; fila < celdas.length; fila++) {
+			for(int col = 0; col < celdas[0].length; col++) {
+				celdas[fila][col].removeLetra();
+			}
+		}
+	}
+	
 }
