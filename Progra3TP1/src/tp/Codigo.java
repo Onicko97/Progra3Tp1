@@ -16,7 +16,7 @@ public class Codigo {
 	
 	public void botonPresionado(JTextField txt, String boton) {
 		if(boton == "delete") {
-			String aux = txt.getText();
+			String aux = txt.getText();	
 			aux = aux.substring(0, aux.length()-1);
 			txt.setText(aux);
 		}

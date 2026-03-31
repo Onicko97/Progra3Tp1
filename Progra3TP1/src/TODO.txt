@@ -1,0 +1,6 @@
+- Al tocar cada tecla solo debe escribir en la fila en la que este el jugador actualmente (por ejemplo si esta en la fila 1, no debe escribir en las otras)
+- Debe haber algun metodo en presenter que una la vista con el modelo al tocar una tecla que se cree una Celda en Tablero con la letra que escribio el usuario.
+- El background de las celdas se deben poner verde si coincide la posicion de las letras de la palabra que eligio el juego y la que ingreso el usuario
+- el background de las celdas se deben poner amarillas si una de las letras no coincide con lo que ingreso el usuario pero si estan contenidos en la palabra que eligio el juego
+- si el usuario no acerto con la palabra, debe pasar al siguiente intento (a la proxima fila si hubiese) por ejemplo de la fila 1 a la 2 y asi.
+- Agregar algun mensaje en caso de que el usuario gane  
