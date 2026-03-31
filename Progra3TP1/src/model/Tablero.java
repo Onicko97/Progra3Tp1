@@ -7,38 +7,29 @@ public class Tablero {
 	private int filaActual;
 	private int columnaActual;
 	private Celda[][] celdas;
-	private String palabraRandom;
-	
+	private String palabraRandom;	
 	
 	public Tablero( ) {
 		this.filaActual = 0;
 		this.columnaActual = 0;
 		construirTablero();
-		obtenerPalabraJuego();
+	//deje perro para probarr
+		palabraRandom="perro";
+	//	obtenerPalabraJuego();
 	}
 	
 	public void construirTablero() {
 		this.celdas = new Celda[FILAS][COLUMNAS];
 		for(int fila = 0; fila < FILAS; fila++ ) {
 			for(int col = 0; col < COLUMNAS; col++) {
-				this.celdas[fila][col] = new Celda("");
+				this.celdas[fila][col] = new Celda();
 			}
 		}
-	}
-	
-	//metodo para testear
-	public void imprimirPalabra () {
-		System.out.println(this.palabraRandom);
 	}
 	
 	public int getFilaActual() {
 		return this.filaActual;
 	}
-	
-	public void modificarCelda(int fila, int col, String letra) {
-		this.celdas[fila][col].setLetra(letra);
-	}
-	
 	
 	public void setFilaActual(int fila) {
 		this.filaActual = fila;
@@ -51,22 +42,31 @@ public class Tablero {
 	public void setColumnaActual(int col) {
 		this.columnaActual = col;
 	}
-	public void addColumnaActual() {
-			
-			this.columnaActual += 1;
-		
-	}
-	public void subtractColumnaActual() {
-			
-	this.columnaActual -= 1;
-		
-	}
-	public void addFilaActual() {
-		this.filaActual += 1;
+	public String getPalabraRandom() {
+		return this.palabraRandom;
 	}
 	
-	public String getPalabraJuego() {
-		return this.palabraRandom;
+	//limites de filas y columnas
+	public boolean puedeInsertarLetra() {
+		return columnaActual<COLUMNAS;
+	}
+	public boolean quedanIntentos() {
+		return filaActual<FILAS;
+	}
+	//
+	public void insertarLetra(String l) {
+		if(puedeInsertarLetra()) {
+			celdas[filaActual][columnaActual].setLetra(l);
+			columnaActual++;
+		}
+	}
+	
+	public void borrarUltimaLetra() {
+	    if (columnaActual > 0) {
+	        columnaActual--; 
+	        
+	        celdas[filaActual][columnaActual].removeLetra();
+	    }
 	}
 	
 	public void obtenerPalabraJuego() {
@@ -74,32 +74,57 @@ public class Tablero {
 		this.palabraRandom = palabra;
 	}
 	
+	public void avanzarFila() {
+	    if (quedanIntentos()){
+	        this.filaActual++;    
+	        this.columnaActual = 0;
+	    }
+	}
+	
+	public String concatenarLetrasFila() {
+	    StringBuilder palabra = new StringBuilder();
+	    int fila = this.getFilaActual();
+	   
+	    for (int c = 0; c < COLUMNAS; c++) {
+	        String letra = celdas[fila][c].getLetra();	      
+	        if (!letra.isEmpty()) {
+	            palabra.append(letra);
+	        }
+	    }
+	    	    return palabra.toString().toLowerCase();
+	}	
+	
+	
+	
 	public boolean verificarPalabraConFila() {
-		System.out.println(this.filaActual);
-		System.out.println(this.columnaActual);
-		
-		int fila = this.getFilaActual();
-		Celda[] arrayCeldas = celdas[fila];
-		String[] letrasArray = {arrayCeldas[0].getLetra(), arrayCeldas[1].getLetra(), arrayCeldas[2].getLetra(),
-				arrayCeldas[3].getLetra(), arrayCeldas[4].getLetra()};
-		String palabraJugador = String.join("", letrasArray);
-		System.out.println(palabraJugador);
-		return palabraRandom.equals(palabraJugador);
+	    String palabraJugador = concatenarLetrasFila();
+	    return palabraRandom.equalsIgnoreCase(palabraJugador);
 	}
-	public boolean verificarCoincidePosicionLetra(int index) {
-		int fila = this.getFilaActual();
-		Celda[] arrayCeldas = celdas[fila];
-		Celda celda = arrayCeldas[index];
-		String[] palabraRandomArray = Palabras.stringToArray(palabraRandom);
-		return palabraRandomArray[index].equals(celda.getLetra());
-		
+	
+	
+	
+	public EstadoLetra verificarCoincidePosicionLetra(int columna) {
+	    String letraJugador = celdas[filaActual][columna].getLetra();
+	    String letraCorrecta = Palabras.stringToArray(palabraRandom)[columna];
+	    
+	    if (letraJugador.equals(letraCorrecta)) {
+	        return EstadoLetra.BIEN;
+	    }
+	    if (palabraRandom.contains(letraJugador)) {
+	        return EstadoLetra.CASI;
+	    }
+	    return EstadoLetra.MAL;
 	}
-	public boolean verificarContieneLetra(int index) {
-		int fila = this.getFilaActual();
-		Celda[] arrayCeldas = celdas[fila];
-		Celda celda = arrayCeldas[index];
-		String[] palabraRandomArray = Palabras.stringToArray(palabraRandom);
-		return Palabras.contieneLetraEnArray(palabraRandomArray, celda.getLetra());
+	
+	public void reiniciarJuego() { //debe reiniciar todo y elegir una nueva palabra random
+		filaActual = 0;
+		columnaActual = 0;
+		obtenerPalabraJuego();
+		for(int fila = 0; fila < celdas.length; fila++) {
+			for(int col = 0; col < celdas[0].length; col++) {
+				celdas[fila][col].removeLetra();
+			}
+		}
 	}
 	
 }

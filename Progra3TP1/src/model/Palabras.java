@@ -1,23 +1,19 @@
 package model;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
 public class Palabras {
 
-	private final static Set<String> palabrasWordle = new HashSet<>(Set.of("perro", "casas", "viejo", "sonar"));
-//	private final static Set<String> palabrasWordle = new HashSet<>();
-//	private final static String listaPalabras[] = {"perro", "casas", "viejo", "sonar"};
-	
-//	este codigo comentado (renglones: 11,12,18,19) esta xq Set.of me tira error en mi eclipse viejo, no lo borren
+	//private final static Set<String> palabrasWordle = new HashSet<>(Set.of("perro", "casas", "viejo", "sonar"));
+	private final static HashSet<String> palabrasWordle = new HashSet<>();
+	private final static String[] listaPalabras = {"perro", "casas", "viejo", "sonar"};
 	
 	public static String obtenerPalabraRandom() {
-
-//		for (String string : listaPalabras) {
-//			palabrasWordle.add(string);}
-		
+		for (String string : listaPalabras) {
+			palabrasWordle.add(string);
+		}
 		Random random = new Random();
 		int numRandom = random.nextInt(palabrasWordle.size());
 		String[] palabras = palabrasWordle.toArray(new String[palabrasWordle.size()]);
@@ -30,10 +26,5 @@ public class Palabras {
 	
 	public static String[] stringToArray(String word) {
 		return word.split("");
-	}
-	
-	public static boolean contieneLetraEnArray(String[] letras, String letra) {
-		boolean isContained = Arrays.stream(letras).anyMatch(letra::equals);
-		return isContained;
 	}
 }

@@ -1,26 +1,14 @@
 package presenter;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-
+import model.EstadoLetra;
 import model.Tablero;
 import view.VentanaPrincipal;
-import view.components.CeldaComponent;
-import view.components.Tecla;
+
 
 public class JuegoPresenter {
 	private VentanaPrincipal ventana;
 	private Tablero modelo;
-	private int filaActual;
-	private int columnaActual;
+	
 	
 	public JuegoPresenter(VentanaPrincipal ventana, Tablero modelo) {
 		this.ventana = ventana;
@@ -28,122 +16,79 @@ public class JuegoPresenter {
 	}
 	
 	public void iniciar() {
-		EventQueue.invokeLater(new Runnable() 
-				{
-					public void run() 
-					{
-						try 
-						{
-							ventana.setVisible(true);
-						} 
-						catch (Exception e) 
-						{
-							e.printStackTrace();
-						}
-					}
-				});
-		iniciarJuego();
-	}
-	
-	public void iniciarJuego() {
-		configurarListenerBotonesTeclado();
-		configurarListenerVentana();
-	}
-	
-	public void modificarBackgroundCelda(int filaActual) {
-		CeldaComponent[] celdas = ventana.getGrillaUI().getCeldas()[modelo.getFilaActual()];
-		for(CeldaComponent celda: celdas) { 
-			celda.setBackground(Color.GREEN);
-		}
-	}
-	
-	public void modificarBackgroundCelda() {
-		CeldaComponent[] celdas = ventana.getGrillaUI().getCeldas()[modelo.getFilaActual()];
-		for (int i = 0; i < celdas.length; i++) {
-			
-			if(modelo.verificarCoincidePosicionLetra(i)) {
-				celdas[i].setBackground(Color.GREEN);
-			} else if(modelo.verificarContieneLetra(i)) {
-			
-				celdas[i].setBackground(Color.YELLOW);
-			
-		}
-		
-	}
-	}
-	
-	public void verificarEstadoJuego() {
-		
-			if (modelo.verificarPalabraConFila()) {
-				modificarBackgroundCelda(modelo.getFilaActual());
-				JOptionPane.showMessageDialog(null, "usted ha ganado!!!");
-			} else {
-				modificarBackgroundCelda();
-				modelo.setColumnaActual(0);
-				modelo.addFilaActual();
-			}
-		
-	}
-	
-	public boolean jugadorCompletoIntento() {
-		return modelo.getColumnaActual() == 4;
+		ventana.mostrar();
+		configurarControlador();
 	}
 	
 	
-	public void configurarListenerVentana() {
-		modelo.imprimirPalabra();
-		ventana.addKeyListener(new KeyAdapter() {
-			
-			@Override
-			public void keyPressed(KeyEvent e) {
-				modelo.imprimirPalabra();
-				//verificarEstadoJuego();
-				if(e.getKeyCode() == KeyEvent.VK_ENTER && modelo.getColumnaActual() == 5) {
-					verificarEstadoJuego();
-				}
-			}
-		});
+	public void configurarControlador() {
+		ventana.setListenerTeclado(new VentanaPrincipal.TecladoListener() {
+	        @Override
+	        public void teclaPresionada(String valor) {
+	            if (valor.equals("ENTER")) {
+	                verificarEstadoJuego();
+	            } else if (valor.equals("dl")){
+	            	procesarBorrar();
+	            }
+	            	else  {  procesarLetra(valor);
+	            }
+	        }
+	    });
 	}
 	
-	public void configurarListenerBotonesTeclado() {
-		
-		List<Tecla> teclas = ventana.getTecladoUI().getTeclas();
-		CeldaComponent[][] celdas = ventana.getGrillaUI().getCeldas();
-		
-		for(JButton tecla: teclas ) {
-			tecla.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-					String letra = tecla.getText();
-					if(modelo.getColumnaActual() < 5)
-						modelo.modificarCelda(modelo.getFilaActual(), modelo.getColumnaActual(), letra);
-					if( tecla.getText() == "dl" && modelo.getColumnaActual()>0) {
-						borrarLetra(celdas, modelo);
-					} else if(modelo.getColumnaActual() < 5 && tecla.getText() != "dl"){
-						agregarLetra(celdas, modelo, tecla);
-					}
-//				
-//				if(modelo.getColumnaActual()==5) {
-//					modelo.setColumnaActual(0);
-//					modelo.addFilaActual();
-//				}
-			
-				
-			}
+	private void modificarBackgroundCelda() {
+	    int fila = modelo.getFilaActual();
+	    
+	    for (int col = 0; col < 5; col++) {
+	        EstadoLetra resultado = modelo.verificarCoincidePosicionLetra(col);
+	        
+	        ventana.pintarCelda(fila, col, resultado);
+	    }
+	}
 
-			
-		}
-					
-	);
-		}
+	private void procesarBorrar() {
+	    if (modelo.getColumnaActual() > 0) {
+	        
+	        modelo.borrarUltimaLetra();
+	        
+	        int fila = modelo.getFilaActual();
+	        int col = modelo.getColumnaActual();
+	        
+	        ventana.limpiarCeldaEnGrilla(fila, col);
+	    }
+	}
+	private void verificarEstadoJuego() {
+	    if (modelo.getColumnaActual() < 5) { 
+	        return; 
+	    }
+
+	    modificarBackgroundCelda();
+
+	    if (modelo.verificarPalabraConFila()) {
+	        ventana.mostrarMensaje("Ganaste");
+	        reiniciarJuego();
+	    } else {
+	        modelo.avanzarFila(); 
+	        if (!modelo.quedanIntentos()) {
+	            ventana.mostrarMensaje("Perdiste, la palabra era: " + modelo.getPalabraRandom());
+	            reiniciarJuego();
+	        }
+	    }
+	}
+	private void procesarLetra(String letra) {
+        
+		if (modelo.puedeInsertarLetra()) {
+            int fila = modelo.getFilaActual();
+            int col = modelo.getColumnaActual();
+            
+            modelo.insertarLetra(letra); 
+            ventana.mostrarLetraEnGrilla(fila, col, letra);
+        }
 	}
 	
-	public void agregarLetra (CeldaComponent[][] celdas, Tablero modelo, JButton tecla) {
-		celdas[modelo.getFilaActual()][modelo.getColumnaActual()].setLetra(tecla.getText());
-		modelo.addColumnaActual();
+	public void reiniciarJuego() {
+		modelo.reiniciarJuego();
+		ventana.reiniciarJuego();
 	}
 	
-	public void borrarLetra(CeldaComponent[][] celdas, Tablero modelo) {
-		celdas[modelo.getFilaActual()][modelo.getColumnaActual()-1].removeLetra();
-		modelo.subtractColumnaActual();
-	}
 }

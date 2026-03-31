@@ -1,3 +1,4 @@
+
 package view.components;
 
 import java.awt.BorderLayout;
@@ -36,8 +37,5 @@ public class CeldaComponent extends JPanel {
 		letraLabel.setText(letra);
 	}
 	
-	public void removeLetra() {
-		letraLabel.setText("");
-	}
 	
 }
