@@ -14,7 +14,7 @@ public class Tablero {
 		this.columnaActual = 0;
 		construirTablero();
 	//deje perro para probarr
-		palabraRandom="perro";
+		palabraRandom="PERRO";
 	//	obtenerPalabraJuego();
 	}
 	

@@ -20,9 +20,9 @@ public class CeldaComponent extends JPanel {
 	
 	public void propiedadesPorDefecto() {
 		this.setLayout(new BorderLayout());
-        this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
-        this.setBackground(Color.WHITE);
-        this.setForeground(Color.black);
+        this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+        this.setForeground(Color.WHITE);
+        this.setBackground(Color.BLACK);
 
         letraLabel = new JLabel("", SwingConstants.CENTER);
         letraLabel.setFont(new Font("Arial", Font.BOLD, 30));
