@@ -1,11 +1,14 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import view.VentanaPrincipal.TecladoListener;
 import view.components.Tecla;
@@ -13,7 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class TecladoUI extends JPanel{
-	private final String[] abecedario = {"a", "b", "c", "d", "e", "f", "g", "h", "i","j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z","dl", "ENTER"};
+	private final String[] abecedario = {"A", "B", "C", "D", "E", "F", "G", "H", "I","J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","dl", "ENTER"};
 	private List<Tecla> teclas;
 	private TecladoListener listener;
 	
@@ -24,6 +27,8 @@ public class TecladoUI extends JPanel{
 	public void propiedadesPorDefecto() {
 		this.teclas = new ArrayList<Tecla>();
 		this.setLayout(new GridLayout(4, 7, 5, 5));
+		this.setBorder(new EmptyBorder(10,100,10,100));
+		this.setBackground(Color.BLACK);
 		crearTeclado();
 	}
 	
@@ -32,7 +37,14 @@ public class TecladoUI extends JPanel{
 			Tecla tecla = new Tecla(abecedario[i]);
 			teclas.add(tecla);
 			this.add(tecla);
+			if(abecedario[i].equals("ENTER")) {
+				tecla.setFontSizeTecla(6);
 			}
+			if(abecedario[i].equals("dl")) {
+				tecla.setIconoTecla();
+			}
+			}
+		
 	}
 	
 	public List<Tecla> getTeclas() {
