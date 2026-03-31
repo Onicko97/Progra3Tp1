@@ -60,16 +60,14 @@ public class JuegoPresenter {
 	public void modificarBackgroundCelda() {
 		CeldaComponent[] celdas = ventana.getGrillaUI().getCeldas()[modelo.getFilaActual()];
 		for (int i = 0; i < celdas.length; i++) {
-			
 			if(modelo.verificarCoincidePosicionLetra(i)) {
 				celdas[i].setBackground(Color.GREEN);
-			} else if(modelo.verificarContieneLetra(i)) {
-			
+			}else if(modelo.verificarContieneLetra(i)) {
 				celdas[i].setBackground(Color.YELLOW);
-			
+			}else{
+				celdas[i].setBackground(Color.GRAY);
+			}
 		}
-		
-	}
 	}
 	
 	public void verificarEstadoJuego() {
