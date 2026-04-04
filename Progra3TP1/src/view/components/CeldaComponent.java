@@ -22,7 +22,7 @@ public class CeldaComponent extends JPanel {
 		this.setLayout(new BorderLayout());
         this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         this.setForeground(Color.WHITE);
-        this.setBackground(Color.BLACK);
+        this.setBackground(Color.WHITE);
 
         letraLabel = new JLabel("", SwingConstants.CENTER);
         letraLabel.setFont(new Font("Arial", Font.BOLD, 30));

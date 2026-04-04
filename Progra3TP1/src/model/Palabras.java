@@ -6,14 +6,14 @@ import java.util.Set;
 
 public class Palabras {
 
-	//private final static Set<String> palabrasWordle = new HashSet<>(Set.of("perro", "casas", "viejo", "sonar"));
-	private final static HashSet<String> palabrasWordle = new HashSet<>();
-	private final static String[] listaPalabras = {"perro", "casas", "viejo", "sonar"};
+	private final static Set<String> palabrasWordle = new HashSet<>(Set.of("PERRO", "CASAS", "VIEJO", "SONAR"));
+//	private final static HashSet<String> palabrasWordle = new HashSet<>();
+//	private final static String[] listaPalabras = {"PERRO", "CASAS", "VIEJO", "SONAR"};
 	
 	public static String obtenerPalabraRandom() {
-		for (String string : listaPalabras) {
-			palabrasWordle.add(string);
-		}
+//		for (String string : listaPalabras) {
+//			palabrasWordle.add(string);
+//		}
 		Random random = new Random();
 		int numRandom = random.nextInt(palabrasWordle.size());
 		String[] palabras = palabrasWordle.toArray(new String[palabrasWordle.size()]);
