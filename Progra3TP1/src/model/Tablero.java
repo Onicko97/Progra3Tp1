@@ -7,15 +7,17 @@ public class Tablero {
 	private int filaActual;
 	private int columnaActual;
 	private Celda[][] celdas;
-	private String palabraRandom;	
+	private String palabraRandom;
+	private String idioma;
 	
-	public Tablero( ) {
+	public Tablero(String idioma) {
 		this.filaActual = 0;
 		this.columnaActual = 0;
+		this.idioma = idioma;
 		construirTablero();
 	//deje perro para probarr
 	//	palabraRandom="PERRO";
-		obtenerPalabraJuego();
+		obtenerPalabraJuego(this.idioma);
 	}
 	
 	public void construirTablero() {
@@ -25,6 +27,10 @@ public class Tablero {
 				this.celdas[fila][col] = new Celda();
 			}
 		}
+	}
+	
+	public String getIdioma() {
+		return this.idioma;
 	}
 	
 	public int getFilaActual() {
@@ -69,8 +75,8 @@ public class Tablero {
 	    }
 	}
 	
-	public void obtenerPalabraJuego() {
-		String palabra = Palabras.obtenerPalabraRandom();
+	public void obtenerPalabraJuego(String idioma) {
+		String palabra = Palabras.obtenerPalabraRandom(idioma);
 		this.palabraRandom = palabra;
 	}
 	
@@ -119,7 +125,7 @@ public class Tablero {
 	public void reiniciarJuego() { //debe reiniciar todo y elegir una nueva palabra random
 		filaActual = 0;
 		columnaActual = 0;
-		obtenerPalabraJuego();
+		obtenerPalabraJuego(idioma);
 		for(int fila = 0; fila < celdas.length; fila++) {
 			for(int col = 0; col < celdas[0].length; col++) {
 				celdas[fila][col].removeLetra();

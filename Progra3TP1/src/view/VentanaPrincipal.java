@@ -15,7 +15,8 @@ import model.EstadoLetra;
 public class VentanaPrincipal extends JFrame {
 	private final GrillaUI grilla = new GrillaUI();
 	private final TecladoUI teclado = new TecladoUI();
-	private final HeaderUI header = new HeaderUI();
+	private HeaderUI header;
+	
 	
 	public void mostrar() {
 	    EventQueue.invokeLater(new Runnable() {
@@ -29,8 +30,9 @@ public class VentanaPrincipal extends JFrame {
 	        }
 	    });
 	}
-	public VentanaPrincipal() {
+	public VentanaPrincipal(String idioma) {
 		super("Wordle");
+		header = new HeaderUI(idioma);
 		propiedadesPorDefecto();
 		crearHeader();
 		crearGrilla();
