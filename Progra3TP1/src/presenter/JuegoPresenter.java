@@ -118,4 +118,8 @@ public class JuegoPresenter {
 		reiniciarJuego();
 	}
 	
+	public String obtenerIdioma() {
+		return modelo.getIdioma();
+	}
+	
 }

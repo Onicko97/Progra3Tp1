@@ -9,6 +9,7 @@ public class Palabras {
 	private final static Set<String> palabrasWordle = new HashSet<>(Set.of("PERRO", "CASAS", "VIEJO", "SONAR"));
 	private final static Set<String> palabrasWordleDificil = new HashSet<>(Set.of("COLMENA", "SOLDADO", "CARPETA", "CELULAR"));
 	private final static Set<String> palabrasWordleEnglish = new HashSet<>(Set.of("CASES", "PAIRS", "HOVER", "SOUND"));
+	private final static Set<String> palabrasWordleEnglishDificil = new HashSet<>(Set.of("COUNTRY", "MORNING", "BELIEVE", "PICTURE", "WEATHER"));
 	
 //  todo lo comentado es xq mi eclipse viejo no reconoce el comando Set.of 
 //	private final static HashSet<String> palabrasWordle = new HashSet<>();
@@ -27,15 +28,22 @@ public class Palabras {
 				return palabras[numRandom];
 			}
 			else {
-				int numRandom = random.nextInt(palabrasWordle.size());
+				int numRandom = random.nextInt(palabrasWordleEnglish.size());
 				String[] palabras = palabrasWordleEnglish.toArray(new String[palabrasWordleEnglish.size()]);
 				return palabras[numRandom];
 			}
 		}
 		else {
-			int numRandom = random.nextInt(palabrasWordleDificil.size());
-			String[] palabras = palabrasWordleDificil.toArray(new String[palabrasWordleDificil.size()]);
-			return palabras[numRandom];
+			if(idioma.equals("Español")) {
+				int numRandom = random.nextInt(palabrasWordleDificil.size());
+				String[] palabras = palabrasWordleDificil.toArray(new String[palabrasWordleDificil.size()]);
+				return palabras[numRandom];
+			}
+			else {
+				int numRandom = random.nextInt(palabrasWordleEnglishDificil.size());
+				String[] palabras = palabrasWordleEnglishDificil.toArray(new String[palabrasWordleEnglishDificil.size()]);
+				return palabras[numRandom];
+			}
 		}
 	}
 	
