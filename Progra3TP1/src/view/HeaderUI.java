@@ -16,20 +16,20 @@ import view.components.BotonDificultad;
 import view.components.BotonInstrucciones;
 
 public class HeaderUI extends JPanel {
-	public HeaderUI() {
-		propiedadesPorDefecto();
-	}
 	
-	public void propiedadesPorDefecto() {
-		
+	public HeaderUI(String idioma) {
+		propiedadesPorDefecto(idioma);
+	}
+
+	public void propiedadesPorDefecto(String idioma) {
+	
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.setBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
 		
 		this.setBackground(Color.BLACK);
 		
 		this.add(Box.createHorizontalGlue());
-		this.add(new BotonInstrucciones());
-		//this.add(new BotonDificultad());
+		this.add(new BotonInstrucciones(idioma));
 	}
 	
 	public void crearBotonDificultad(JuegoPresenter juego) {

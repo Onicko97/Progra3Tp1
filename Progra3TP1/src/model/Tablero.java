@@ -8,11 +8,13 @@ public class Tablero {
 	private int columnaActual;
 	private Celda[][] celdas;
 	private String palabraRandom;
+	private String idioma;
 	private int dificultad = 0;		//0=normal, 1=dificil
 	
-	public Tablero( ) {
+	public Tablero(String idioma) {
 		this.filaActual = 0;
 		this.columnaActual = 0;
+		this.idioma = idioma;
 		construirTablero();
 		//Palabras.guardarPalabras();
 		obtenerPalabraJuego();
@@ -25,6 +27,10 @@ public class Tablero {
 				this.celdas[fila][col] = new Celda();
 			}
 		}
+	}
+	
+	public String getIdioma() {
+		return this.idioma;
 	}
 	
 	public int getFilaActual() {
@@ -58,7 +64,7 @@ public class Tablero {
 	public boolean quedanIntentos() {
 		return filaActual<FILAS;
 	}
-	//
+	
 	public void insertarLetra(String l) {
 		if(puedeInsertarLetra()) {
 			celdas[filaActual][columnaActual].setLetra(l);
@@ -75,7 +81,7 @@ public class Tablero {
 	}
 	
 	public void obtenerPalabraJuego() {
-		String palabra = Palabras.obtenerPalabraRandom(dificultad);
+		String palabra = Palabras.obtenerPalabraRandom(dificultad, idioma);
 		this.palabraRandom = palabra;
 		//System.out.println(palabraRandom); //para probar
 	}

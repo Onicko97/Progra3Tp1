@@ -8,19 +8,29 @@ public class Palabras {
 
 	private final static Set<String> palabrasWordle = new HashSet<>(Set.of("PERRO", "CASAS", "VIEJO", "SONAR"));
 	private final static Set<String> palabrasWordleDificil = new HashSet<>(Set.of("COLMENA", "SOLDADO", "CARPETA", "CELULAR"));
+	private final static Set<String> palabrasWordleEnglish = new HashSet<>(Set.of("CASES", "PAIRS", "HOVER", "SOUND"));
 	
 //  todo lo comentado es xq mi eclipse viejo no reconoce el comando Set.of 
 //	private final static HashSet<String> palabrasWordle = new HashSet<>();
 //	private final static String[] listaPalabras = {"PERRO", "CASAS", "VIEJO", "SONAR"};
 //	private final static HashSet<String> palabrasWordleDificil = new HashSet<>();
 //	private final static String[] listaPalabrasDificil = {"COLMENA", "SOLDADO", "CARPETA", "CELULAR"};
+//	private final static HashSet<String> palabrasWordleEnglish = new HashSet<>();
+//	private final static String[] listaPalabrasEnglish = {"CASES", "PAIRS", "HOVER", "SOUND"};
 	
-	public static String obtenerPalabraRandom(int dificultad) {
+	public static String obtenerPalabraRandom(int dificultad, String idioma) {
 		Random random = new Random();
 		if(dificultad == 0) {
-			int numRandom = random.nextInt(palabrasWordle.size());
-			String[] palabras = palabrasWordle.toArray(new String[palabrasWordle.size()]);
-			return palabras[numRandom];
+			if(idioma.equals("Español")) {
+				int numRandom = random.nextInt(palabrasWordle.size());
+				String[] palabras = palabrasWordle.toArray(new String[palabrasWordle.size()]);
+				return palabras[numRandom];
+			}
+			else {
+				int numRandom = random.nextInt(palabrasWordle.size());
+				String[] palabras = palabrasWordleEnglish.toArray(new String[palabrasWordleEnglish.size()]);
+				return palabras[numRandom];
+			}
 		}
 		else {
 			int numRandom = random.nextInt(palabrasWordleDificil.size());
@@ -30,7 +40,7 @@ public class Palabras {
 	}
 	
 	public static boolean verificarExistenciaPalabra(String palabra) {
-		return palabrasWordle.contains(palabra);
+		return palabrasWordle.contains(palabra) || palabrasWordleEnglish.contains(palabra); //ineficiente
 	}
 	
 	public static String[] stringToArray(String word) {
@@ -44,6 +54,9 @@ public class Palabras {
 //		}
 //		for (String string : listaPalabrasDificil) {
 //			palabrasWordleDificil.add(string);
+//		}
+//		for (String string : listaPalabrasEnglish) {
+//			palabrasWordleEnglish.add(string);
 //		}
 //	}
 }

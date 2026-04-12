@@ -66,24 +66,36 @@ public class JuegoPresenter {
 	        ventana.limpiarCeldaEnGrilla(fila, col);
 	    }
 	}
+	
 	private void verificarEstadoJuego() {
-	    if (modelo.getColumnaActual() < 5) { 
+		
+	    if (modelo.getColumnaActual() < 5) { //arreglar
 	        return; 
 	    }
 
 	    modificarBackgroundCelda();
 
 	    if (modelo.verificarPalabraConFila()) {
-	        ventana.mostrarMensaje("Ganaste");
+	    	if(modelo.getIdioma().equals("Español")) {
+	    		ventana.mostrarMensaje("Ganaste");
+	    	}else {
+	    		ventana.mostrarMensaje("You win");
+	    	}    
 	        reiniciarJuego();
 	    } else {
 	        modelo.avanzarFila(); 
 	        if (!modelo.quedanIntentos()) {
-	            ventana.mostrarMensaje("Perdiste, la palabra era: " + modelo.getPalabraRandom());
+	        	if(modelo.getIdioma().equals("Español")) {
+	        		ventana.mostrarMensaje("Perdiste, la palabra era: " + modelo.getPalabraRandom());
+	        	}
+	        	else {
+	        		ventana.mostrarMensaje("You lose, the word was: " + modelo.getPalabraRandom());
+	        	}
 	            reiniciarJuego();
 	        }
 	    }
 	}
+	
 	private void procesarLetra(String letra) {
         
 		if (modelo.puedeInsertarLetra()) {

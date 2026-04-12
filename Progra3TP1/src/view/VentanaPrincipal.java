@@ -14,9 +14,10 @@ import model.EstadoLetra;
 import presenter.JuegoPresenter;
 
 public class VentanaPrincipal extends JFrame {
+	
 	private final GrillaUI grilla = new GrillaUI();
 	private final TecladoUI teclado = new TecladoUI();
-	private final HeaderUI header = new HeaderUI();
+	private HeaderUI header;
 	
 	public void mostrar() {
 	    EventQueue.invokeLater(new Runnable() {
@@ -31,8 +32,9 @@ public class VentanaPrincipal extends JFrame {
 	    });
 	}
 	
-	public VentanaPrincipal() {
+	public VentanaPrincipal(String idioma) {
 		super("Wordle");
+		header = new HeaderUI(idioma);
 		propiedadesPorDefecto();
 		crearHeader();
 		crearGrilla();
@@ -68,6 +70,7 @@ public class VentanaPrincipal extends JFrame {
 	private TecladoUI getTecladoUI() {
 		return teclado;
 	}
+	
 	//esto es para qur el presenter pueda acceder sin un get
 	public void setListenerTeclado(TecladoListener listener) {
 	    this.teclado.setTecladoListener(listener);
@@ -76,15 +79,19 @@ public class VentanaPrincipal extends JFrame {
 	public void mostrarLetraEnGrilla(int fila, int col, String letra) {
 	    this.grilla.escribirEnCelda(fila, col, letra);
 	}
+	
 	public void mostrarMensaje(String mensaje) {
 	    JOptionPane.showMessageDialog(this, mensaje);
 	}
+	
 	public void limpiarCeldaEnGrilla(int fila, int col) {
 	    this.grilla.escribirEnCelda(fila, col, "");
 	}
+	
 	public interface TecladoListener {
 	    void teclaPresionada(String valor);
 	}
+	
 	public void pintarCelda(int fila, int col, EstadoLetra estado) {
 	    Color color;
 	    switch (estado) {
@@ -109,7 +116,5 @@ public class VentanaPrincipal extends JFrame {
 		grilla.removeAll();
 		grilla.cambiarGrilla(dificultad);
 		grilla.updateUI();
-		
-		
 	}
 }
