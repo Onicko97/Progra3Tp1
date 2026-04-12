@@ -15,14 +15,14 @@ public class GrillaUI extends JPanel {
 
 	private CeldaComponent[][] celdas;
 	private final int FILAS = 6;
-	private final int COLUMNAS = 5;
+	private int COLUMNAS = 5;
 	
 	public GrillaUI() {
 		propiedadesPorDefecto();
 	}
 	
 	public void propiedadesPorDefecto() {
-		this.celdas = new CeldaComponent[6][5];
+		this.celdas = new CeldaComponent[FILAS][COLUMNAS];
 		this.setBorder(new EmptyBorder(10,195,10,195));
 		this.setLayout(new GridLayout(6, 5, 5, 5));
 		this.setBackground(Color.BLACK);
@@ -63,6 +63,15 @@ public class GrillaUI extends JPanel {
 				escribirEnCelda(fila,col,"");
 			}
 		}
+	}
+	
+	public void cambiarGrilla(int dificultad) {
+		if(dificultad == 1)
+			COLUMNAS = 7;
+		else
+			COLUMNAS = 5;
+		celdas = new CeldaComponent[FILAS][COLUMNAS];
+		crearGrilla();
 	}
 	
 }

@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.EstadoLetra;
+import presenter.JuegoPresenter;
 
 public class VentanaPrincipal extends JFrame {
 	private final GrillaUI grilla = new GrillaUI();
@@ -29,6 +30,7 @@ public class VentanaPrincipal extends JFrame {
 	        }
 	    });
 	}
+	
 	public VentanaPrincipal() {
 		super("Wordle");
 		propiedadesPorDefecto();
@@ -97,5 +99,17 @@ public class VentanaPrincipal extends JFrame {
 	
 	public void reiniciarJuego() {
 		grilla.reiniciarCeldas();
+	}
+	
+	public void crearBotonDificultad(JuegoPresenter juego) {
+		header.crearBotonDificultad(juego);
+	}
+	
+	public void cambiarDificultad(int dificultad) {
+		grilla.removeAll();
+		grilla.cambiarGrilla(dificultad);
+		grilla.updateUI();
+		
+		
 	}
 }

@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import presenter.JuegoPresenter;
+import view.components.BotonDificultad;
 import view.components.BotonInstrucciones;
 
 public class HeaderUI extends JPanel {
@@ -19,8 +21,6 @@ public class HeaderUI extends JPanel {
 	}
 	
 	public void propiedadesPorDefecto() {
-	
-		
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.setBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
@@ -29,7 +29,10 @@ public class HeaderUI extends JPanel {
 		
 		this.add(Box.createHorizontalGlue());
 		this.add(new BotonInstrucciones());
+		//this.add(new BotonDificultad());
 	}
 	
-	
+	public void crearBotonDificultad(JuegoPresenter juego) {
+		this.add(new BotonDificultad(juego));
+	}
 }

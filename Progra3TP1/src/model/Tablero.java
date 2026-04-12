@@ -3,18 +3,18 @@ package model;
 public class Tablero {
 
 	private final int FILAS = 6;
-	private final int COLUMNAS = 5;
+	private int COLUMNAS = 5;
 	private int filaActual;
 	private int columnaActual;
 	private Celda[][] celdas;
-	private String palabraRandom;	
+	private String palabraRandom;
+	private int dificultad = 0;		//0=normal, 1=dificil
 	
 	public Tablero( ) {
 		this.filaActual = 0;
 		this.columnaActual = 0;
 		construirTablero();
-	//deje perro para probarr
-	//	palabraRandom="PERRO";
+		//Palabras.guardarPalabras();
 		obtenerPalabraJuego();
 	}
 	
@@ -42,8 +42,13 @@ public class Tablero {
 	public void setColumnaActual(int col) {
 		this.columnaActual = col;
 	}
+	
 	public String getPalabraRandom() {
 		return this.palabraRandom;
+	}
+	
+	public int getDificultad() {
+		return dificultad;
 	}
 	
 	//limites de filas y columnas
@@ -70,8 +75,9 @@ public class Tablero {
 	}
 	
 	public void obtenerPalabraJuego() {
-		String palabra = Palabras.obtenerPalabraRandom();
+		String palabra = Palabras.obtenerPalabraRandom(dificultad);
 		this.palabraRandom = palabra;
+		//System.out.println(palabraRandom); //para probar
 	}
 	
 	public void avanzarFila() {
@@ -125,6 +131,16 @@ public class Tablero {
 				celdas[fila][col].removeLetra();
 			}
 		}
+	}
+	
+	public void cambiarDificultad(int dificultad) {
+		this.dificultad = dificultad;
+		if(dificultad == 1)
+			COLUMNAS = 7;
+		else {
+			COLUMNAS = 5;
+		}
+		construirTablero();
 	}
 	
 }

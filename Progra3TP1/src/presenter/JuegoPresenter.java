@@ -16,6 +16,7 @@ public class JuegoPresenter {
 	}
 	
 	public void iniciar() {
+		ventana.crearBotonDificultad(this);
 		ventana.mostrar();
 		configurarControlador();
 	}
@@ -37,12 +38,20 @@ public class JuegoPresenter {
 	}
 	
 	private void modificarBackgroundCelda() {
+		int dificultad = modelo.getDificultad();
 	    int fila = modelo.getFilaActual();
 	    
-	    for (int col = 0; col < 5; col++) {
-	        EstadoLetra resultado = modelo.verificarCoincidePosicionLetra(col);
-	        
-	        ventana.pintarCelda(fila, col, resultado);
+	    if(dificultad == 0) {
+	    	for (int col = 0; col < 5; col++) {
+	        	EstadoLetra resultado = modelo.verificarCoincidePosicionLetra(col);
+	        	ventana.pintarCelda(fila, col, resultado);
+	    	}
+	    }
+	    else {
+	    	for (int col = 0; col < 7; col++) {
+	        	EstadoLetra resultado = modelo.verificarCoincidePosicionLetra(col);
+	        	ventana.pintarCelda(fila, col, resultado);
+	    	}
 	    }
 	}
 
@@ -89,6 +98,12 @@ public class JuegoPresenter {
 	public void reiniciarJuego() {
 		modelo.reiniciarJuego();
 		ventana.reiniciarJuego();
+	}
+	
+	public void cambiarDificultad(int dificultad) {
+		modelo.cambiarDificultad(dificultad);
+		ventana.cambiarDificultad(dificultad);
+		reiniciarJuego();
 	}
 	
 }
