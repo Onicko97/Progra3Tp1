@@ -46,6 +46,7 @@ public class SeleccionIdioma extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JRadioButton botonEspaniol = new JRadioButton("Español");
+		botonEspaniol.setSelected(true);
 		buttonGroup.add(botonEspaniol);
 		botonEspaniol.setBounds(207, 70, 109, 23);
 		contentPanel.add(botonEspaniol);

@@ -6,10 +6,18 @@ import java.util.Set;
 
 public class Palabras {
 
-	private final static Set<String> palabrasWordle = new HashSet<>(Set.of("PERRO", "CASAS", "VIEJO", "SONAR"));
-	private final static Set<String> palabrasWordleDificil = new HashSet<>(Set.of("COLMENA", "SOLDADO", "CARPETA", "CELULAR"));
-	private final static Set<String> palabrasWordleEnglish = new HashSet<>(Set.of("CASES", "PAIRS", "HOVER", "SOUND"));
-	private final static Set<String> palabrasWordleEnglishDificil = new HashSet<>(Set.of("COUNTRY", "MORNING", "BELIEVE", "PICTURE", "WEATHER"));
+	private final static Set<String> palabrasWordle = new HashSet<>(Set.of("PERRO", "CASAS", "VIEJO", "SONAR","ARBOL", "MASAS", "LIBRO", "PLANO", 
+	"SUEÑO", "PLAYA", "VALOR", "TEXTO", "RADIO", "GENTE", "FORMA", "TIGRE", "VERDE", "NUBES", "BRAZO", "MENTE"));
+	
+	private final static Set<String> palabrasWordleDificil = new HashSet<>(Set.of("COLMENA", "SOLDADO", "CARPETA", "CELULAR","PLANETA", "TECLADO",
+	"CUADROS", "MENSAJE", "TRABAJO", "ENERGIA", "CEREBRO", "CAMINAR", "FUERZAS", "DERECHO", "DESTINO", "ESCUELA", "MEMORIA", "TIEMPOS", "VENTANA", "RELOJES"));
+	
+	private final static Set<String> palabrasWordleEnglish = new HashSet<>(Set.of("CASES", "PAIRS", "HOVER", "SOUND","TABLE", "HOUSE", "WATER", "LIGHT", 
+			"BREAD", "NIGHT", "GRASS", "HEART", "PIANO", "FRUIT", "PLANE", "WORLD", "DREAM", "CLOCK", "SPACE", "MUSIC"));
+	
+	private final static Set<String> palabrasWordleEnglishDificil = new HashSet<>(Set.of("WEATHER", "MORNING", "BELIEVE", "PICTURE", "BETWEEN", 
+			"COUNTRY", "THROUGH", "STUDENT", "THOUGHT", "FRIENDS", "PROCESS", "WORKING", "KITCHEN", "NOTHING", "PERFECT", "EXAMPLE","FREEDOM", "HISTORY", 
+			"SCIENCE", "LIBRARY"));
 	
 //  todo lo comentado es xq mi eclipse viejo no reconoce el comando Set.of 
 //	private final static HashSet<String> palabrasWordle = new HashSet<>();
