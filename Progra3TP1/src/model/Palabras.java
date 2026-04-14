@@ -55,10 +55,6 @@ public class Palabras {
 		}
 	}
 	
-	public static boolean verificarExistenciaPalabra(String palabra) {
-		return palabrasWordle.contains(palabra) || palabrasWordleEnglish.contains(palabra); //ineficiente
-	}
-	
 	public static String[] stringToArray(String word) {
 		return word.split("");
 	}
