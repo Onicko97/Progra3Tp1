@@ -12,9 +12,11 @@ import javax.swing.JButton;
 public class Tecla extends JButton {
 
 	private static final Color COLOR_DEFECTO = new Color(211, 214, 218); 
+	private String valorOriginal;
 	
 	public Tecla(String letra) {
 		super(letra);
+		this.valorOriginal = letra;
 		configuracionPredeterminada();
 	}
 	
@@ -25,21 +27,27 @@ public class Tecla extends JButton {
 		this.setForeground(Color.WHITE);
 		this.setPreferredSize(new Dimension(20, 40));
 		
-		
 	}
-	
-	
 	
 	public void setFontSizeTecla(int size) {
 		this.setFont(new Font("Arial", Font.BOLD, size));
 	}
 	
-	public void setIconoTecla() {
+	public String getValorOriginal() {
+        return valorOriginal;
+    }
 
-		ImageIcon original = new ImageIcon(Tecla.class.getResource("/resources/borrar.png"));
-		
-		Image imgEscalada = original.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		this.setIcon(new ImageIcon(imgEscalada));
-		
-	}
+    public void setIconoTecla() {
+        ImageIcon original = new ImageIcon(Tecla.class.getResource("/resources/borrar.png"));
+        Image imgEscalada = original.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        this.setIcon(new ImageIcon(imgEscalada));
+        this.setText(""); // Borra el texto visual
+    }
+
+    public void setIconoEnter() {
+        ImageIcon original = new ImageIcon(Tecla.class.getResource("/resources/check.png"));
+        Image imgEscalada = original.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        this.setIcon(new ImageIcon(imgEscalada));
+        this.setText(""); // Borra el texto visual
+    }	
 }

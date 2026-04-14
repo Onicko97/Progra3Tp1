@@ -71,7 +71,7 @@ public class VentanaPrincipal extends JFrame {
 		return teclado;
 	}
 	
-	//esto es para qur el presenter pueda acceder sin un get
+	
 	public void setListenerTeclado(TecladoListener listener) {
 	    this.teclado.setTecladoListener(listener);
 	}

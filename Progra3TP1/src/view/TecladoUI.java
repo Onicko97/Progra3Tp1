@@ -38,7 +38,7 @@ public class TecladoUI extends JPanel{
 			teclas.add(tecla);
 			this.add(tecla);
 			if(abecedario[i].equals("ENTER")) {
-				tecla.setFontSizeTecla(6);
+				tecla.setIconoEnter();
 			}
 			if(abecedario[i].equals("dl")) {
 				tecla.setIconoTecla();
@@ -60,7 +60,7 @@ public class TecladoUI extends JPanel{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (listener != null) {
-                        listener.teclaPresionada(tecla.getText());
+                    	listener.teclaPresionada(tecla.getValorOriginal());
                     }
                 }
             });

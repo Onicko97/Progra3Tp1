@@ -4,3 +4,4 @@
 - el background de las celdas se deben poner amarillas si una de las letras no coincide con lo que ingreso el usuario pero si estan contenidos en la palabra que eligio el juego
 - si el usuario no acerto con la palabra, debe pasar al siguiente intento (a la proxima fila si hubiese) por ejemplo de la fila 1 a la 2 y asi.
 - Agregar algun mensaje en caso de que el usuario gane  
+- No permitir que el usuario avance de fila si lo que escribio no es una palabra existente.

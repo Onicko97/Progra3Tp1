@@ -3,7 +3,7 @@ package model;
 public class Tablero {
 
 	private final int FILAS = 6;
-	private int COLUMNAS = 5;
+	private int columnas = 5;
 	private int filaActual;
 	private int columnaActual;
 	private Celda[][] celdas;
@@ -21,9 +21,9 @@ public class Tablero {
 	}
 	
 	public void construirTablero() {
-		this.celdas = new Celda[FILAS][COLUMNAS];
+		this.celdas = new Celda[FILAS][columnas];
 		for(int fila = 0; fila < FILAS; fila++ ) {
-			for(int col = 0; col < COLUMNAS; col++) {
+			for(int col = 0; col < columnas; col++) {
 				this.celdas[fila][col] = new Celda();
 			}
 		}
@@ -39,6 +39,10 @@ public class Tablero {
 	
 	public void setFilaActual(int fila) {
 		this.filaActual = fila;
+	}
+	
+	public int getColumnas() {
+		return this.columnas;
 	}
 	
 	public int getColumnaActual() {
@@ -59,7 +63,7 @@ public class Tablero {
 	
 	//limites de filas y columnas
 	public boolean puedeInsertarLetra() {
-		return columnaActual<COLUMNAS;
+		return columnaActual<columnas;
 	}
 	public boolean quedanIntentos() {
 		return filaActual<FILAS;
@@ -97,7 +101,7 @@ public class Tablero {
 	    StringBuilder palabra = new StringBuilder();
 	    int fila = this.getFilaActual();
 	   
-	    for (int c = 0; c < COLUMNAS; c++) {
+	    for (int c = 0; c < columnas; c++) {
 	        String letra = celdas[fila][c].getLetra();	      
 	        if (!letra.isEmpty()) {
 	            palabra.append(letra);
@@ -106,14 +110,11 @@ public class Tablero {
 	    	    return palabra.toString().toLowerCase();
 	}	
 	
-	
-	
+
 	public boolean verificarPalabraConFila() {
 	    String palabraJugador = concatenarLetrasFila();
 	    return palabraRandom.equalsIgnoreCase(palabraJugador);
 	}
-	
-	
 	
 	public EstadoLetra verificarCoincidePosicionLetra(int columna) {
 	    String letraJugador = celdas[filaActual][columna].getLetra();
@@ -142,9 +143,9 @@ public class Tablero {
 	public void cambiarDificultad(int dificultad) {
 		this.dificultad = dificultad;
 		if(dificultad == 1)
-			COLUMNAS = 7;
+			columnas = 7;
 		else {
-			COLUMNAS = 5;
+			columnas = 5;
 		}
 		construirTablero();
 	}

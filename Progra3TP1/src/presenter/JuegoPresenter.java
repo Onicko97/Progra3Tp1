@@ -18,11 +18,11 @@ public class JuegoPresenter {
 	public void iniciar() {
 		ventana.crearBotonDificultad(this);
 		ventana.mostrar();
-		configurarControlador();
+		vincularEventos();
 	}
 	
 	
-	public void configurarControlador() {
+	public void vincularEventos() {
 		ventana.setListenerTeclado(new VentanaPrincipal.TecladoListener() {
 	        @Override
 	        public void teclaPresionada(String valor) {
@@ -38,20 +38,12 @@ public class JuegoPresenter {
 	}
 	
 	private void modificarBackgroundCelda() {
-		int dificultad = modelo.getDificultad();
 	    int fila = modelo.getFilaActual();
-	    
-	    if(dificultad == 0) {
-	    	for (int col = 0; col < 5; col++) {
-	        	EstadoLetra resultado = modelo.verificarCoincidePosicionLetra(col);
-	        	ventana.pintarCelda(fila, col, resultado);
-	    	}
-	    }
-	    else {
-	    	for (int col = 0; col < 7; col++) {
-	        	EstadoLetra resultado = modelo.verificarCoincidePosicionLetra(col);
-	        	ventana.pintarCelda(fila, col, resultado);
-	    	}
+	    int totalColumnas = modelo.getColumnas(); 
+
+	    for (int col = 0; col < totalColumnas; col++) {
+	        EstadoLetra resultado = modelo.verificarCoincidePosicionLetra(col);
+	        ventana.pintarCelda(fila, col, resultado);
 	    }
 	}
 
@@ -69,7 +61,7 @@ public class JuegoPresenter {
 	
 	private void verificarEstadoJuego() {
 		
-	    if (modelo.getColumnaActual() < 5) { //arreglar
+	    if (modelo.puedeInsertarLetra()) { 
 	        return; 
 	    }
 
