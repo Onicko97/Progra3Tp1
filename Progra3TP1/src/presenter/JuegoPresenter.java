@@ -60,32 +60,51 @@ public class JuegoPresenter {
 	}
 	
 	private void verificarEstadoJuego() {
-		
 	    if (modelo.puedeInsertarLetra()) { 
 	        return; 
 	    }
-
-	    modificarBackgroundCelda();
-
-	    if (modelo.verificarPalabraConFila()) {
-	    	if(modelo.getIdioma().equals("Español")) {
-	    		ventana.mostrarMensaje("Ganaste");
-	    	}else {
-	    		ventana.mostrarMensaje("You win");
-	    	}    
-	        reiniciarJuego();
-	    } else {
-	        modelo.avanzarFila(); 
-	        if (!modelo.quedanIntentos()) {
-	        	if(modelo.getIdioma().equals("Español")) {
-	        		ventana.mostrarMensaje("Perdiste, la palabra era: " + modelo.getPalabraRandom());
-	        	}
-	        	else {
-	        		ventana.mostrarMensaje("You lose, the word was: " + modelo.getPalabraRandom());
-	        	}
-	            reiniciarJuego();
-	        }
+	    if (!modelo.esPalabraValida()) {
+	        esInvalida();
+	        return; 
 	    }
+	    modificarBackgroundCelda();
+	    
+	    if (modelo.verificarPalabraConFila()) {
+	    	gestionarVictoria();
+	    } else {
+	        gestionarPerder();
+	    }
+	    
+	}
+
+	private void gestionarPerder() {
+		modelo.avanzarFila(); 
+		if (!modelo.quedanIntentos()) {
+			if(modelo.getIdioma().equals("Español")) {
+				ventana.mostrarMensaje("Perdiste, la palabra era: " + modelo.getPalabraRandom());
+			}
+			else {
+				ventana.mostrarMensaje("You lose, the word was: " + modelo.getPalabraRandom());
+			}
+		    reiniciarJuego();
+		}
+	}
+
+	private void gestionarVictoria() {
+		if(modelo.getIdioma().equals("Español")) {
+			ventana.mostrarMensaje("Ganaste");
+		}else {
+			ventana.mostrarMensaje("You win");
+		}    
+		reiniciarJuego();
+	}
+
+	private void esInvalida() {
+		if (modelo.getIdioma().equals("Español")) {
+		    ventana.mostrarMensaje("La palabra no existe");
+		} else {
+		    ventana.mostrarMensaje("Invalid word");
+		}
 	}
 	
 	private void procesarLetra(String letra) {
@@ -111,7 +130,9 @@ public class JuegoPresenter {
 	}
 	
 	public String obtenerIdioma() {
-		return modelo.getIdioma();
+	 	return modelo.getIdioma();
 	}
+	
+	
 	
 }

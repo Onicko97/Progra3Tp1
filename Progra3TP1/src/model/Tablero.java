@@ -149,5 +149,9 @@ public class Tablero {
 		}
 		construirTablero();
 	}
-	
+		
+	public boolean esPalabraValida() {
+	    String palabraJugador = concatenarLetrasFila(); 
+	    return Palabras.verificarExistenciaPalabra(palabraJugador);
+	}
 }
