@@ -41,13 +41,13 @@ public class Tecla extends JButton {
         ImageIcon original = new ImageIcon(Tecla.class.getResource("/resources/borrar.png"));
         Image imgEscalada = original.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         this.setIcon(new ImageIcon(imgEscalada));
-        this.setText(""); // Borra el texto visual
+        this.setText("");
     }
 
     public void setIconoEnter() {
         ImageIcon original = new ImageIcon(Tecla.class.getResource("/resources/check.png"));
         Image imgEscalada = original.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         this.setIcon(new ImageIcon(imgEscalada));
-        this.setText(""); // Borra el texto visual
+        this.setText(""); 
     }	
 }
