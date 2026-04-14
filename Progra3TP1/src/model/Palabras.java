@@ -47,7 +47,7 @@ public class Palabras {
 			}
 		}
 	}
-	
+
 	public static boolean verificarExistenciaPalabra(String palabra) {
 	    String palabraMin = palabra.trim().toUpperCase(); 
 	    return palabrasWordle.contains(palabraMin) || palabrasWordleEnglish.contains(palabraMin) 
